@@ -1,3 +1,5 @@
+# coding=UTF-8
+import sys
 import time
 import requests;
 from lxml import html
@@ -10,9 +12,11 @@ shuangliu = 'shuangliu'
 tianfuxinqu = 'tianfuxinqu'
 
 
+reload(sys)                         # 2
+sys.setdefaultencoding('utf-8')
+
 def get_houselist(squre):
-    url.replace('squre', squre)
-    page = requests.get(url)
+    page = requests.get(url.replace('squre', squre))
     tree = html.fromstring(page.content.decode('UTF-8'))
     return tree.xpath("//div[4]/div[1]/ul/li")
 

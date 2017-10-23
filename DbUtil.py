@@ -1,6 +1,3 @@
-from twisted.enterprise import adbapi              #导入twisted的包
-import MySQLdb
-import MySQLdb.cursors
-
+# coding=UTF-8
 def saveToDatabase(price, url, district, structure,unitPrice,squre):
     return
