@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50645caa-a9ed-487d-9325-b71f40da7e4b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/lianjia.iml" afterPath="$PROJECT_DIR$/.idea/lianjia.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DbUtil.py" afterPath="$PROJECT_DIR$/DbUtil.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/House.py" afterPath="$PROJECT_DIR$/House.py" />
@@ -32,11 +30,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SearchNewHouese.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SearchNewHouese.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SearchNewHouese.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+            <state relative-caret-position="551">
+              <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
               <folding>
                 <element signature="e#15#25#0" expanded="true" />
               </folding>
@@ -54,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DbUtil.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DbUtil.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DbUtil.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="14" lean-forward="false" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
+            <state relative-caret-position="57">
+              <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -67,8 +65,8 @@
       <file leaf-file-name="House.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/House.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="14" lean-forward="false" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
+            <state relative-caret-position="133">
+              <caret line="7" column="34" lean-forward="false" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -94,9 +92,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/SearchNewHouese.py" />
         <option value="$PROJECT_DIR$/House.py" />
         <option value="$PROJECT_DIR$/DbUtil.py" />
-        <option value="$PROJECT_DIR$/SearchNewHouese.py" />
       </list>
     </option>
   </component>
@@ -196,6 +194,14 @@
       <option name="presentableId" value="Default" />
       <updated>1508584737665</updated>
     </task>
+    <task id="LOCAL-00001" summary="refactor url">
+      <created>1508750831470</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1508750831470</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -228,6 +234,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="refactor url" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor url" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -316,29 +326,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SearchNewHouese.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding>
+            <element signature="e#15#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/House.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="14" lean-forward="false" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
+        <state relative-caret-position="133">
+          <caret line="7" column="34" lean-forward="false" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DbUtil.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="14" lean-forward="false" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
+        <state relative-caret-position="57">
+          <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SearchNewHouese.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="35" column="0" lean-forward="true" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding>
-            <element signature="e#15#25#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
