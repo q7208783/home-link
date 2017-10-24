@@ -1,13 +1,13 @@
 # coding=UTF-8
 import sys
 import time
-import requests;
-import ReUtils
-from lxml import html
-import Queue
 
-import DbUtil
-from House import House
+import requests;
+from lxml import html
+
+from object import Queue
+from object.House import House
+from utils import DbUtil, ReUtils
 
 url = "https://cd.lianjia.com/ershoufang/squre/co32ng1hu1nb1ba65ea10000ep10000/"
 shuangliu = 'shuangliu'

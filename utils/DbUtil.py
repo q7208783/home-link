@@ -1,6 +1,5 @@
 # coding=UTF-8
 import MySQLdb
-import House
 
 conn = MySQLdb.connect(host = "rm-wz92xoj923k8s3v8do.mysql.rds.aliyuncs.com",
                        port = 3306,

@@ -19,9 +19,6 @@ class Queue():
             self.queue.pop(0)
             self.front = self.front + 1
 
-    def __contains__(self, item):
-        return self.queue.__contains__(item)
-
     def isfull(self):
         return self.rear - self.front + 1 == self.size
 
