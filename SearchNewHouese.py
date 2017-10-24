@@ -2,6 +2,7 @@
 import sys
 import time
 import requests;
+import ReUtils
 from lxml import html
 
 from DbUtil import saveToDatabase
@@ -24,14 +25,38 @@ def get_houselist(squre):
 def getHouse(house):
     price = int(house.xpath('./div[1]/div[6]/div[1]/span/text()')[0])
     url = str(house.xpath('./a/@href')[0])
-    district = str(house.xpath('./div[1]/div[2]/div/a/text()')[0])
-    structure = str(house.xpath('./div[1]/div[2]/div/text()')[0])
-    unitPrice = str(house.xpath('./div[1]/div[6]/div[2]/span/text()')[0])
-    return House(price, url, district, structure, unitPrice)
+    district_name = str(house.xpath('./div[1]/div[2]/div/a/text()')[0])
+
+    house_structure_list = str(house.xpath('./div[1]/div[2]/div/text()')[0]).split('|')
+    house_structure = house_structure_list[1]
+    house_size = ReUtils.getFirstNumeric(house_structure_list[2])
+    house_orient = house_structure_list[3]
+    house_decoration = house_structure_list[4]
+    if (len(house_structure_list) > 5):
+        house_elevator = house_structure_list[5]
+    else:
+        house_elevator = "未知"
+
+    unitPrice = ReUtils.getFirstNumeric(str(house.xpath('./div[1]/div[6]/div[2]/span/text()')[0]))
+    img_url = str(house.xpath('./a/img/@src')[0])
+
+    follow_info_list = str(house.xpath('./div[1]/div[4]/text()')[0]).split('/')
+    follower_num = ReUtils.getFirstNumeric(follow_info_list[0])
+    visit_num = ReUtils.getFirstNumeric(follow_info_list[1])
+    release_time = follow_info_list[2]
+
+    building_info = str(house.xpath('./div[1]/div[3]/div/text()')[0])
+    area_name = str(house.xpath('./div[1]/div[3]/div/a/text()')[0])
+    title = str(house.xpath('./div[1]/div[1]/a/text()')[0])
+    return House(title, price, url, district_name, house_structure, house_size, house_orient, house_decoration,
+                 house_elevator, unitPrice, img_url, follower_num, visit_num, release_time, building_info, area_name)
 
 
 def save(house, squre):
-    return saveToDatabase(house.price, house.url, house.district, house.structure, house.unitPrice, squre)
+    return saveToDatabase(house.title, house.price, house.url, house.district_name, house.house_structure,
+                          house.house_size, house.house_orient, house.house_decoration,
+                          house.house_elevator, house.unitPrice, house.img_url, house.follower_num, house.visit_num,
+                          house.release_time, house.building_info, house.area_name, squre)
 
 
 while True:
