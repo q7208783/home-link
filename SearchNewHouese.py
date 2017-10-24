@@ -4,8 +4,9 @@ import time
 import requests;
 import ReUtils
 from lxml import html
+import Queue
 
-from DbUtil import saveToDatabase
+import DbUtil
 from House import House
 
 url = "https://cd.lianjia.com/ershoufang/squre/co32ng1hu1nb1ba65ea10000ep10000/"
@@ -14,6 +15,7 @@ tianfuxinqu = 'tianfuxinqu'
 
 reload(sys)  # 2
 sys.setdefaultencoding('utf-8')
+DbUtil.testdb()
 
 
 def get_houselist(squre):
@@ -52,18 +54,24 @@ def getHouse(house):
                  house_elevator, unitPrice, img_url, follower_num, visit_num, release_time, building_info, area_name)
 
 
-def save(house, squre):
-    return saveToDatabase(house.title, house.price, house.url, house.district_name, house.house_structure,
-                          house.house_size, house.house_orient, house.house_decoration,
-                          house.house_elevator, house.unitPrice, house.img_url, house.follower_num, house.visit_num,
-                          house.release_time, house.building_info, house.area_name, squre)
+def save(house):
+    # return DbUtil.saveToDatabase(house.title, house.price, house.url, house.district_name, house.house_structure,
+    #                       house.house_size, house.house_orient, house.house_decoration,
+    #                       house.house_elevator, house.unitPrice, house.img_url, house.follower_num, house.visit_num,
+    #                       house.release_time, house.building_info, house.area_name, squre)
+    return DbUtil.saveToDatabase(house)
 
 
 while True:
+
+    list = [20]
+    queue = Queue(30)
     for house in get_houselist(tianfuxinqu):
         houseObj = getHouse(house)
+        houseObj.squre =  '天府新区'
+
         if houseObj.price < 125:
-            save(houseObj, '天府新区')
+            save(houseObj)
 
     time.sleep(3)
 

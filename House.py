@@ -1,7 +1,7 @@
 # coding=UTF-8
 class House(object):
     def __init__(self, title, price, url, district_name, house_structure, house_size, house_orient, house_decoration,
-                 house_elevator, unitPrice, img_url, follower_num, visit_num, release_time, building_info, area_name):
+                 house_elevator, unitPrice, img_url, follower_num, visit_num, release_time, building_info, area_name, squre):
         self.title = title
         self.price = price
         self.url = url
@@ -18,3 +18,4 @@ class House(object):
         self.release_time = release_time
         self.building_info = building_info
         self.area_name = area_name
+        self.squre = squre
