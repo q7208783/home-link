@@ -1,14 +1,14 @@
 # coding=UTF-8
 import sys
 import time
+
 import requests;
-import ReUtils
 from lxml import html
+
 from MyQueue import *
 from SqureMap import squreDict
-
-import DbUtil
-from House import House
+from model.House import House
+from utils import DbUtil, ReUtils
 
 url = "https://cd.lianjia.com/ershoufang/squre/co32ng1hu1nb1ba65ea10000ep10000/"
 
