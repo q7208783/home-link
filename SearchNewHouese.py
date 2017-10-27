@@ -4,18 +4,20 @@ import time
 import requests;
 import ReUtils
 from lxml import html
-import Queue
+from MyQueue import *
+from SqureMap import squreDict
 
 import DbUtil
 from House import House
 
 url = "https://cd.lianjia.com/ershoufang/squre/co32ng1hu1nb1ba65ea10000ep10000/"
-shuangliu = 'shuangliu'
-tianfuxinqu = 'tianfuxinqu'
 
 reload(sys)  # 2
 sys.setdefaultencoding('utf-8')
 DbUtil.testdb()
+
+queues = [];
+queuesDict = {}
 
 
 def get_houselist(squre):
@@ -24,8 +26,8 @@ def get_houselist(squre):
     return tree.xpath("//div[4]/div[1]/ul/li")
 
 
-def getHouse(house):
-    price = int(house.xpath('./div[1]/div[6]/div[1]/span/text()')[0])
+def getHouse(house, squre):
+    price = float(house.xpath('./div[1]/div[6]/div[1]/span/text()')[0])
     url = str(house.xpath('./a/@href')[0])
     district_name = str(house.xpath('./div[1]/div[2]/div/a/text()')[0])
 
@@ -51,33 +53,30 @@ def getHouse(house):
     area_name = str(house.xpath('./div[1]/div[3]/div/a/text()')[0])
     title = str(house.xpath('./div[1]/div[1]/a/text()')[0])
     return House(title, price, url, district_name, house_structure, house_size, house_orient, house_decoration,
-                 house_elevator, unitPrice, img_url, follower_num, visit_num, release_time, building_info, area_name)
+                 house_elevator, unitPrice, img_url, follower_num, visit_num, release_time, building_info, area_name,
+                 squre)
 
 
 def save(house):
-    # return DbUtil.saveToDatabase(house.title, house.price, house.url, house.district_name, house.house_structure,
-    #                       house.house_size, house.house_orient, house.house_decoration,
-    #                       house.house_elevator, house.unitPrice, house.img_url, house.follower_num, house.visit_num,
-    #                       house.release_time, house.building_info, house.area_name, squre)
     return DbUtil.saveToDatabase(house)
 
 
-while True:
-
-    list = [20]
-    queue = Queue(30)
-    for house in get_houselist(tianfuxinqu):
-        houseObj = getHouse(house)
-        houseObj.squre =  '天府新区'
-
-        if houseObj.price < 125:
+def squreAllHouse(squre):
+    if queuesDict.has_key(squre):
+        queue = queuesDict[squre]
+    else:
+        queue = MyQueue(40)
+    for house in get_houselist(squre):
+        houseObj = getHouse(house, squreDict[squre])
+        if houseObj.url not in queue:
+            queue.enqueue(houseObj.url)
             save(houseObj)
+            if (queue.isfull()):
+                queue.dequeue()
+    queuesDict[squre] = queue
 
-    time.sleep(3)
 
-    for house in get_houselist(shuangliu):
-        houseObj = getHouse(house)
-        if houseObj.price < 115:
-            save(houseObj, '双流')
-
+while True:
+    for key in squreDict:
+        squreAllHouse(key)
     time.sleep(3)

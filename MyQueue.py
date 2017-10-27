@@ -1,4 +1,4 @@
-class Queue():
+class MyQueue(object):
     def __init__(self, size):
         self.size = size
         self.front = -1
@@ -19,9 +19,6 @@ class Queue():
             self.queue.pop(0)
             self.front = self.front + 1
 
-    def __contains__(self, item):
-        return self.queue.__contains__(item)
-
     def isfull(self):
         return self.rear - self.front + 1 == self.size
 
@@ -30,3 +27,6 @@ class Queue():
 
     def showQueue(self):
         print self.queue
+
+    def __contains__(self, item):
+        return self.queue.__contains__(item)
