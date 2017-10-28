@@ -19,3 +19,4 @@ class House(object):
         self.building_info = building_info
         self.area_name = area_name
         self.squre = squre
+
