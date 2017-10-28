@@ -37,9 +37,9 @@ def insertListToDatabase(insertList):
                     ) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
     args = get_insert_house_args(insertList)
     try:
-        logging.debug('execute before')
+        print ('execute before')
         cur.executemany(insertSql, args)
-        logging.debug('execute after')
+        print ('execute after')
         conn.commit()
     except Exception as e:
         print e
