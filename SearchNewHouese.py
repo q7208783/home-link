@@ -1,6 +1,7 @@
 # coding=UTF-8
 import sys
 import time
+import logging
 
 import requests;
 from lxml import html
@@ -58,6 +59,7 @@ def getHouse(house, squre):
 
 
 def save(house):
+    logging.debug('save before')
     return DbUtil.saveToDatabase(house)
 
 
@@ -78,5 +80,6 @@ def squreAllHouse(squre):
 
 while True:
     for key in squreDict:
+        logging.debug('enter while')
         squreAllHouse(key)
     time.sleep(3)

@@ -1,4 +1,5 @@
 # coding=UTF-8
+import logging
 import MySQLdb
 import datetime
 conn = MySQLdb.connect(host="rm-wz92xoj923k8s3v8do.mysql.rds.aliyuncs.com",
@@ -36,7 +37,9 @@ def insertListToDatabase(insertList):
                     ) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
     args = get_insert_house_args(insertList)
     try:
+        logging.debug('execute before')
         cur.executemany(insertSql, args)
+        logging.debug('execute after')
         conn.commit()
     except Exception as e:
         print e
