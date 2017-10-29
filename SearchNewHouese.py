@@ -22,13 +22,22 @@ queuesDict = {}
 
 
 def get_houselist(squre):
-    page = requests.get(url.replace('squre', squre))
-    tree = html.fromstring(page.content.decode('UTF-8'))
-    return tree.xpath("//div[4]/div[1]/ul/li")
+    try:
+        page = requests.get(url.replace('squre', squre))
+        tree = html.fromstring(page.content.decode('UTF-8'))
+        print 'requests success!'
+    except Exception as e:
+        print e
+    node = tree.xpath("//div[4]/div[1]/ul/li")
+    print node
+    return node
 
 
 def getHouse(house, squre):
+    print('gerHouse')
+
     price = float(house.xpath('./div[1]/div[6]/div[1]/span/text()')[0])
+    print price
     url = str(house.xpath('./a/@href')[0])
     district_name = str(house.xpath('./div[1]/div[2]/div/a/text()')[0])
 
@@ -69,7 +78,9 @@ def squreAllHouse(squre):
     else:
         queue = MyQueue(40)
     for house in get_houselist(squre):
+        print house
         houseObj = getHouse(house, squreDict[squre])
+        print houseObj.title
         if houseObj.url not in queue:
             queue.enqueue(houseObj.url)
             save(houseObj)
@@ -80,6 +91,5 @@ def squreAllHouse(squre):
 
 while True:
     for key in squreDict:
-        print ('enter while')
         squreAllHouse(key)
     time.sleep(3)
