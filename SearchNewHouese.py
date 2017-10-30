@@ -1,6 +1,7 @@
 # coding=UTF-8
 import sys
 import time
+import platform
 
 import requests;
 from lxml import html
@@ -19,11 +20,18 @@ DbUtil.testdb()
 queues = [];
 queuesDict = {}
 
+os_name = platform.platform()
+
 
 def get_houselist(squre):
     page = requests.get(url.replace('squre', squre))
     tree = html.fromstring(page.content.decode('UTF-8'))
-    return tree.xpath("//div[4]/div[1]/ul/li")
+    if('Linux' in os_name):
+        print '---linux platform---'
+        return tree.xpath('/html/body/div[4]/div[1]/ul/li')
+    else:
+        print '---windows platform---'
+        return tree.xpath("//div[4]/div[1]/ul/li")
 
 
 def getHouse(house, squre):
