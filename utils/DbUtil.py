@@ -1,6 +1,7 @@
 # coding=UTF-8
+import logging
 import MySQLdb
-
+import datetime
 conn = MySQLdb.connect(host="rm-wz92xoj923k8s3v8do.mysql.rds.aliyuncs.com",
                        port=3306,
                        user="root",
@@ -18,9 +19,9 @@ def testdb():
 
 
 def saveToDatabase(House):
-    if (len(insertList) < 10):
-        insertList.add(House)
-    else:
+    House.create_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    insertList.add(House)
+    if (len(insertList) > 10):
         insertListToDatabase(insertList)
         insertList.clear()
     return
@@ -32,11 +33,13 @@ def insertListToDatabase(insertList):
                     house_price, house_size, house_address, 
                     house_structure, house_url, house_orient,
                     elevator, img_url, attention_num,
-                    visit_num, release_time, unit_price
-                    ) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
+                    visit_num, release_time, unit_price , create_time, title
+                    ) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
     args = get_insert_house_args(insertList)
     try:
+        print ('execute before')
         cur.executemany(insertSql, args)
+        print ('execute after')
         conn.commit()
     except Exception as e:
         print e
@@ -52,7 +55,8 @@ def get_insert_house_args(insertList):
                      house.price, house.house_size, house.area_name,
                      house.house_structure, house.url, house.house_orient,
                      house.house_elevator, house.img_url, house.follower_num,
-                     house.visit_num, house.release_time, house.unitPrice])
+                     house.visit_num, house.release_time, house.unitPrice,
+                     house.create_time, house.title])
     return args
 
 
