@@ -39,10 +39,10 @@ def get_houselist(squre):
     page = requests.get(url.replace('squre', squre))
     tree = html.fromstring(page.content.decode('UTF-8'))
     if ('Linux' in os_name):
-        print '---linux platform---'
+
         return tree.xpath('/html/body/div[4]/div[1]/ul/li')
     else:
-        print '---windows platform---'
+
         return tree.xpath("//div[4]/div[1]/ul/li")
 
 

@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="50645caa-a9ed-487d-9325-b71f40da7e4b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/lianjia.iml" afterPath="$PROJECT_DIR$/.idea/lianjia.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SearchNewHouese.py" afterPath="$PROJECT_DIR$/SearchNewHouese.py" />
     </list>
@@ -50,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SearchNewHouese.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SearchNewHouese.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SearchNewHouese.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="584">
-              <caret line="95" column="32" lean-forward="true" selection-start-line="95" selection-start-column="32" selection-end-line="95" selection-end-column="32" />
+            <state relative-caret-position="322">
+              <caret line="44" column="4" lean-forward="false" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
               <folding>
                 <element signature="e#15#25#0" expanded="true" />
               </folding>
@@ -62,10 +60,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DbUtil.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DbUtil.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils/DbUtil.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
+            <state relative-caret-position="646">
               <caret line="69" column="26" lean-forward="true" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
               <folding>
                 <marker date="1509344563735" expanded="true" signature="2062:2063" ph="..." />
@@ -397,7 +395,14 @@
       <option name="project" value="LOCAL" />
       <updated>1509344532215</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="add logger">
+      <created>1509440332365</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1509440332366</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -440,7 +445,8 @@
     <MESSAGE value="refactor add some dict" />
     <MESSAGE value="add db utils" />
     <MESSAGE value="different from linux and windows" />
-    <option name="LAST_COMMIT_MESSAGE" value="different from linux and windows" />
+    <MESSAGE value="add logger" />
+    <option name="LAST_COMMIT_MESSAGE" value="add logger" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -692,22 +698,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SearchNewHouese.py">
+    <entry file="file://$PROJECT_DIR$/utils/DbUtil.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="584">
-          <caret line="95" column="32" lean-forward="true" selection-start-line="95" selection-start-column="32" selection-end-line="95" selection-end-column="32" />
+        <state relative-caret-position="646">
+          <caret line="69" column="26" lean-forward="true" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
           <folding>
-            <element signature="e#15#25#0" expanded="true" />
+            <marker date="1509344563735" expanded="true" signature="2062:2063" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/utils/DbUtil.py">
+    <entry file="file://$PROJECT_DIR$/SearchNewHouese.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
-          <caret line="69" column="26" lean-forward="true" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="26" />
+          <caret line="44" column="4" lean-forward="false" selection-start-line="44" selection-start-column="4" selection-end-line="44" selection-end-column="4" />
           <folding>
-            <marker date="1509344563735" expanded="true" signature="2062:2063" ph="..." />
+            <element signature="e#15#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
