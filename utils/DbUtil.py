@@ -1,5 +1,4 @@
 # coding=UTF-8
-import logging
 import MySQLdb
 import datetime
 
@@ -85,3 +84,8 @@ def check_valid(url):
     except Exception as e:
         print e
         print 'select * from house , house_url got ERROR!'
+
+
+def insert_house_area(city,squre,area):
+    query_sql = """insert """
+
