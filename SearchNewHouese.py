@@ -5,7 +5,6 @@ import platform
 
 import requests
 from lxml import html
-from SqureMap import squreDict
 from model.House import House
 from utils import DbUtil, ReUtils, logger_util
 
@@ -76,7 +75,8 @@ def squreAllHouse(squre):
             logger.debug('save house, house title: ' + houseObj.title)
             save(houseObj)
 
-
+from SqureMap import get_squre_dict
+squreDict = get_squre_dict()
 while True:
     for key in squreDict:
         squreAllHouse(key)
