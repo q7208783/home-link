@@ -7,8 +7,6 @@ import requests
 from lxml import html
 import logging
 import logging.handlers
-
-from MyQueue import *
 from SqureMap import squreDict
 from model.House import House
 from utils import DbUtil, ReUtils
@@ -82,23 +80,26 @@ def save(house):
 
 
 def squreAllHouse(squre):
-    if queuesDict.has_key(squre):
-        queue = queuesDict[squre]
-    else:
-        queue = MyQueue(40)
+    # if queuesDict.has_key(squre):
+    #     queue = queuesDict[squre]
+    # else:
+    #     queue = MyQueue(40)
     for house in get_houselist(squre):
         houseObj = getHouse(house, squreDict[squre])
         logger.debug('get a house, house title: ' + houseObj.title)
-        if houseObj.url not in queue:
-            queue.enqueue(houseObj.url)
-            logger.debug('save house, house title: '+houseObj.title)
+        # if houseObj.url not in queue:
+        #     queue.enqueue(houseObj.url)
+        #     logger.debug('save house, house title: '+houseObj.title)
+        #     if (queue.isfull()):
+        #         queue.dequeue()
+        #     else:
+        if DbUtil.check_valid(houseObj.url):
+            logger.debug('save house, house title: ' + houseObj.title)
             save(houseObj)
-            if (queue.isfull()):
-                queue.dequeue()
-    queuesDict[squre] = queue
+    # queuesDict[squre] = queue
 
 
 while True:
     for key in squreDict:
         squreAllHouse(key)
-    time.sleep(3)
+    time.sleep(10)

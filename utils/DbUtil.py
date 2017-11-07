@@ -2,6 +2,7 @@
 import logging
 import MySQLdb
 import datetime
+
 conn = MySQLdb.connect(host="rm-wz92xoj923k8s3v8do.mysql.rds.aliyuncs.com",
                        port=3306,
                        user="root",
@@ -10,7 +11,8 @@ conn = MySQLdb.connect(host="rm-wz92xoj923k8s3v8do.mysql.rds.aliyuncs.com",
                        charset="utf8")
 cur = conn.cursor()
 
-insertList = set({})
+insertList = {}
+
 
 def testdb():
     cur.execute("SELECT VERSION()")
@@ -20,14 +22,16 @@ def testdb():
 
 def saveToDatabase(House):
     House.create_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    insertList.add(House)
+
+    if(not insertList.has_key(House.url)):
+        insertList[House.url] = House;
     if (len(insertList) > 10):
-        insertListToDatabase(insertList)
+        insert_list_to_database(insertList)
         insertList.clear()
     return
 
 
-def insertListToDatabase(insertList):
+def insert_list_to_database(insertList):
     insertSql = """insert into house(
                     city_no, district_no, area_no,
                     house_price, house_size, house_address, 
@@ -49,7 +53,7 @@ def insertListToDatabase(insertList):
 
 def get_insert_house_args(insertList):
     args = []
-    for house in insertList:
+    for house in insertList.values():
         res = query_squre_no(house.area_name)
         args.append([res[2], res[1], res[0],
                      house.price, house.house_size, house.area_name,
@@ -70,3 +74,14 @@ def query_squre_no(area):
     except Exception as e:
         print e
         print 'select * from area got ERROR ! '
+
+
+def check_valid(url):
+    query_sql = """select count(house_url) as result from house where house_url = '%s'""" % (url)
+    try:
+        cur.execute(query_sql)
+        result = cur.fetchone()
+        return True if result[0] <= 0 else False
+    except Exception as e:
+        print e
+        print 'select * from house , house_url got ERROR!'
