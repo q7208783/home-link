@@ -37,12 +37,16 @@ def getHouse(house, squre):
     district_name = str(house.xpath('./div[1]/div[2]/div/a/text()')[0])
 
     house_structure_list = str(house.xpath('./div[1]/div[2]/div/text()')[0]).split('|')
+    index = 0
     house_structure = house_structure_list[1]
-    house_size = ReUtils.getFirstNumeric(house_structure_list[2])
-    house_orient = house_structure_list[3]
-    house_decoration = house_structure_list[4]
-    if (len(house_structure_list) > 5):
-        house_elevator = house_structure_list[5]
+    if '别墅' in house_structure:
+        house_structure = house_structure+'|'+house_structure_list[2]
+        index = 1
+    house_size = ReUtils.getFirstNumeric(house_structure_list[2+index])
+    house_orient = house_structure_list[3+index]
+    house_decoration = house_structure_list[4+index]
+    if (len(house_structure_list) > 5+index):
+        house_elevator = house_structure_list[5+index]
     else:
         house_elevator = "未知"
 
@@ -80,4 +84,4 @@ squreDict = get_squre_dict()
 while True:
     for key in squreDict:
         squreAllHouse(key)
-    time.sleep(10)
+    time.sleep(2)
