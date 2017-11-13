@@ -5,7 +5,7 @@ import time
 
 import requests
 from lxml import html
-
+import traceback
 from common.LogMgr import LogMgr
 from model.House import House
 from utils import DbUtil, ReUtils
@@ -80,6 +80,7 @@ def save(house):
 def squreAllHouse(squre):
     for house in get_houselist(squre):
         houseObj = getHouse(house, squreDict[squre])
+        logger_home_link.debug("DEBUG: Get a house, title: " + houseObj.title)
         if DbUtil.check_valid(houseObj.url):
             save(houseObj)
 
@@ -88,5 +89,9 @@ from SqureMap import get_squre_dict
 squreDict = get_squre_dict()
 while True:
     for key in squreDict:
-        squreAllHouse(key)
-    time.sleep(2)
+        try:
+            squreAllHouse(key)
+        except:
+            error_msg = traceback.format_exc()
+            logger_home_link.error(error_msg)
+    time.sleep(4)

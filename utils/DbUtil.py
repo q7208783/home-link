@@ -49,7 +49,7 @@ def insert_list_to_database(insertList):
     except Exception as e:
         logger_db.error("ERROR: insert many house got error, detail :" + e.message)
         conn.rollback()
-    logger_db.debug("DEBUG: insert total: " + len(insertList))
+    logger_db.debug("DEBUG: insert total: " + str(len(insertList)))
 
 
 def get_insert_house_args(insertList):
