@@ -2,7 +2,8 @@
 import MySQLdb
 import datetime
 
-from utils import pinyin_utils, logger_util
+from common.LogMgr import LogMgr
+from utils import pinyin_utils
 
 conn = MySQLdb.connect(host="rm-wz92xoj923k8s3v8do.mysql.rds.aliyuncs.com",
                        port=3306,
@@ -14,7 +15,7 @@ cur = conn.cursor()
 
 insertList = {}
 
-logger = logger_util.get_logger('dblog.log')
+logger_db = LogMgr('dblog.log')
 
 
 def testdb():
@@ -25,7 +26,6 @@ def testdb():
 
 def saveToDatabase(House):
     House.create_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
     if (not insertList.has_key(House.url)):
         insertList[House.url] = House;
     if (len(insertList) > 10):
@@ -44,14 +44,12 @@ def insert_list_to_database(insertList):
                     ) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
     args = get_insert_house_args(insertList)
     try:
-        print ('execute before')
         cur.executemany(insertSql, args)
-        print ('execute after')
         conn.commit()
     except Exception as e:
-        print e
+        logger_db.error("ERROR: insert many house got error, detail :" + e.message)
         conn.rollback()
-    print '[insert_by_many executemany] total:', len(insertList)
+    logger_db.debug("DEBUG: insert total: " + len(insertList))
 
 
 def get_insert_house_args(insertList):
@@ -80,7 +78,7 @@ def query_squre_no(area, squre):
             result = cur.fetchone()
         return result
     except Exception as e:
-        logger.debug(e.message)
+        logger_db.debug("ERROR: query squre no got error, detail: " + e.message)
 
 
 def check_valid(url):
@@ -90,8 +88,7 @@ def check_valid(url):
         result = cur.fetchone()
         return True if result[0] <= 0 else False
     except Exception as e:
-        print e
-        print 'select * from house , house_url got ERROR!'
+        logger_db.debug("ERROR: query house_url existence got error, detail: " + e.message)
 
 
 def insert_house_area(squre, area, city='cd'):
@@ -109,7 +106,7 @@ def insert_house_area(squre, area, city='cd'):
         if area_no is None:
             return insert_area(area, squre_no, city_no)
     except Exception as e:
-        logger.debug('select got error : ' + e.message)
+        logger_db.debug('ERROR: query squre_no, area_no got error, detail: ' + e.message)
         raise e
 
 
@@ -123,7 +120,7 @@ def insert_area(area_name, district_no, city_no):
         return int(cur.lastrowid)
     except Exception as e:
         conn.rollback()
-        logger.debug('insert area got error : ' + e.message)
+        logger_db.debug('insert area got error : ' + e.message)
         raise e
 
 
@@ -133,4 +130,4 @@ def select_all_squre():
         cur.execute(select_all_sql)
         return cur.fetchall()
     except Exception as e:
-        logger.debug("select district got error")
+        logger_db.debug("select district got error, detail:" + e.message)
