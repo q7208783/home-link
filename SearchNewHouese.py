@@ -2,24 +2,31 @@
 import platform
 import sys
 import time
+import json
 
+import datetime
 import requests
 from lxml import html
 import traceback
 from common.LogMgr import LogMgr
 from model.House import House
 from utils import DbUtil, ReUtils
+from utils.RedisPublisher import RedisPublisher
 
 url = "https://cd.lianjia.com/ershoufang/squre/co32ng1hu1nb1ba65ea10000ep10000/"
 reload(sys)  # 2
 sys.setdefaultencoding('utf-8')
 DbUtil.testdb()
 
-queues = [];
+queues = []
 queuesDict = {}
 
 os_name = platform.platform()
 logger_home_link = LogMgr('home-link.log')
+
+insert_list = {}
+
+redis_connector = RedisPublisher()
 
 def get_houselist(squre):
     try:
@@ -73,16 +80,26 @@ def getHouse(house, squre):
                  squre)
 
 
-def save(house):
-    return DbUtil.saveToDatabase(house)
+def save2database(house_obj):
+    house_obj.create_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    if (not insert_list.has_key(house_obj.url)):
+        insert_list[house_obj.url] = house_obj
+        house_dict = house_obj.__dict__
+        house_json = json.dumps(house_dict)
+        redis_connector.publish('HouseChannel',house_json)
+    if (len(insert_list) > 10):
+        DbUtil.insert_list_to_database(insert_list)
+        insert_list.clear()
+    return
 
 
-def squreAllHouse(squre):
+def squre_all_house(squre):
     for house in get_houselist(squre):
-        houseObj = getHouse(house, squreDict[squre])
-        logger_home_link.debug("DEBUG: Get a house, title: " + houseObj.title)
-        if DbUtil.check_valid(houseObj.url):
-            save(houseObj)
+        house_obj = getHouse(house, squreDict[squre])
+        logger_home_link.debug("DEBUG: Get a house, title: " + house_obj.title)
+        if DbUtil.check_valid(house_obj.url):
+            save2database(house_obj)
+
 
 from SqureMap import get_squre_dict
 
@@ -90,7 +107,7 @@ squreDict = get_squre_dict()
 while True:
     for key in squreDict:
         try:
-            squreAllHouse(key)
+            squre_all_house(key)
         except:
             error_msg = traceback.format_exc()
             logger_home_link.error(error_msg)

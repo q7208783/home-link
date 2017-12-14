@@ -1,6 +1,5 @@
 # coding=UTF-8
 import MySQLdb
-import datetime
 
 from common.LogMgr import LogMgr
 from utils import pinyin_utils
@@ -23,19 +22,8 @@ def testdb():
     data = cur.fetchone()
     print "Database connect success! Database version : %s " % data
 
-
-def saveToDatabase(House):
-    House.create_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    if (not insertList.has_key(House.url)):
-        insertList[House.url] = House;
-    if (len(insertList) > 10):
-        insert_list_to_database(insertList)
-        insertList.clear()
-    return
-
-
 def insert_list_to_database(insertList):
-    insertSql = """insert into house(
+    insert_sql = """insert into house(
                     city_no, district_no, area_no,
                     house_price, house_size, house_address, 
                     house_structure, house_url, house_orient,
@@ -44,7 +32,7 @@ def insert_list_to_database(insertList):
                     ) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
     args = get_insert_house_args(insertList)
     try:
-        cur.executemany(insertSql, args)
+        cur.executemany(insert_sql, args)
         conn.commit()
     except Exception as e:
         logger_db.error("ERROR: insert many house got error, detail :" + e.message)
