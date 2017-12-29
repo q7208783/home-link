@@ -1,6 +1,9 @@
 import redis
 
 import config
+from common.LogMgr import LogMgr
+
+logger_publisher = LogMgr('publisher.log')
 
 
 class RedisPublisher(object):
@@ -10,4 +13,5 @@ class RedisPublisher(object):
         self.strict_redis = redis.StrictRedis(connection_pool=self.pool)
 
     def publish(self, channel, msg):
+        logger_publisher.info('channel:' + channel + 'msg:' + msg)
         return self.strict_redis.publish(channel=channel, message=msg)
